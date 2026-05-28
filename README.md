@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: sentence
----
-
 # Predictive Modeling for Diabetic Medication Adherence
 
 ## Project Overview
