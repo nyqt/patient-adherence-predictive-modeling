@@ -12,8 +12,6 @@ data had loaded as expected.
 <b>Click to expand code</b>
 </summary>
 
-</details>
-
 ``` r
 # confirm the data has loaded as expected
 cat("Training Rows:", nrow(patient_train), "\n")
@@ -27,6 +25,8 @@ cat("Testing Rows:", nrow(patient_test), "\n")
 
     ## Testing Rows: 826
 
+</details>
+
 ## Model Evaluation on Training Data
 
 I then fit each model with the training data to measure the response and
@@ -39,8 +39,6 @@ Gradient Boosting models.
 
 <b>Click to expand code</b>
 </summary>
-
-</details>
 
 ``` r
 # Logistic AIC Train AUC
@@ -77,6 +75,8 @@ auc_table
     ## 2 Random Forest       0.859
     ## 3 Gradient Boosting   0.872
 
+</details>
+
 ### Choosing Models
 
 Based on the AUC scores, I chose to continue evaluating the Logistic
@@ -93,13 +93,13 @@ compared to the results of the Logistic Regression model.
 <b>Click to expand code</b>
 </summary>
 
-</details>
-
 ``` r
 # extract model results on training data
 results_lr  <- evaluate_lr(model_lr, patient_train, "adherent_binary")
 results_gbm <- evaluate_gbm(model_gbm, patient_train, "adherent_binary", 500)
 ```
+
+</details>
 
 #### Evaluating Linear Regression Model
 
@@ -112,15 +112,12 @@ The confusion matrix for the Logistic Regression model indicated that:
 
 - **Correct non-adherence predictions:** 61.00%
 
-  <details>
+<details>
 
-  <summary>
+<summary>
 
-  <b>Click to expand code</b>
-
-  </summary>
-
-</details>
+<b>Click to expand code</b>
+</summary>
 
 ``` r
 # logistic regression performance on training data
@@ -131,6 +128,8 @@ percent_correct(patient_train$adherent_binary, results_lr$predict_class)
     ##              Class Correct Total Percent_Correct
     ## 1     1 (Adherent)    1799  2068           86.99
     ## 2 0 (Non-Adherent)     754  1236           61.00
+
+</details>
 
 #### Evaluating Gradient Boosting Model
 
@@ -153,8 +152,6 @@ non-adherent patients.
 <b>Click to expand code</b>
 </summary>
 
-</details>
-
 ``` r
 # gradient boosting performance on training data
 #print(results_gbm$confusion_matrix)
@@ -164,6 +161,8 @@ percent_correct(patient_train$adherent_binary, results_gbm$predict_class)
     ##              Class Correct Total Percent_Correct
     ## 1     1 (Adherent)    1866  2068           90.23
     ## 2 0 (Non-Adherent)     810  1236           65.53
+
+<details>
 
 #### Visualizing ROC Curve for Both Models
 
@@ -176,8 +175,6 @@ data.
 
 <b>Click to expand code</b>
 </summary>
-
-</details>
 
 ``` r
 # in sample ROC curves
@@ -192,6 +189,8 @@ plot_roc_curve(results_gbm$roc, results_gbm$auc, "Gradient Boosting (Train)")
 
 ![](patient_adherence_analysis_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
 
+</details>
+
 Having performed robust evaluation on the models using the training
 data, I then moved on to evaluation the models using the testing data.
 
@@ -204,13 +203,13 @@ data, I then moved on to evaluation the models using the testing data.
 <b>Click to expand code</b>
 </summary>
 
-</details>
-
 ``` r
 # extract model results on test data
 results_lr_test  <- evaluate_lr(model_lr, patient_test, "adherent_binary")
 results_gbm_test <- evaluate_gbm(model_gbm, patient_test, "adherent_binary", 500)
 ```
+
+</details>
 
 #### Evaluating Linear Regression Model
 
@@ -223,15 +222,12 @@ The confusion matrix for the Logistic Regression model indicated that:
 
 - **Correct non-adherence predictions:** 59.40%
 
-  <details>
+<details>
 
-  <summary>
+<summary>
 
-  <b>Click to expand code</b>
-
-  </summary>
-
-</details>
+<b>Click to expand code</b>
+</summary>
 
 ``` r
 # logistic regression accuracy on test data
@@ -242,6 +238,8 @@ percent_correct(patient_test$adherent_binary, results_lr_test$predict_class)
     ##              Class Correct Total Percent_Correct
     ## 1     1 (Adherent)     447   528           84.66
     ## 2 0 (Non-Adherent)     177   298           59.40
+
+</details>
 
 #### Evaluating Gradient Boosting Model
 
@@ -264,8 +262,6 @@ non-adherent patients.
 <b>Click to expand code</b>
 </summary>
 
-</details>
-
 ``` r
 # gradient boosting accuracy on test data
 #print(results_gbm_test$confusion_matrix)
@@ -275,6 +271,8 @@ percent_correct(patient_test$adherent_binary, results_gbm_test$predict_class)
     ##              Class Correct Total Percent_Correct
     ## 1     1 (Adherent)     469   528           88.83
     ## 2 0 (Non-Adherent)     185   298           62.08
+
+</details>
 
 #### Percentage of Incorrect Predictions by Each Model
 
@@ -287,15 +285,12 @@ The confusion matrix for the Logistic Regression model indicated that:
 
 - **Incorrect non-adherence predictions:** 40.60%
 
-  <details>
+<details>
 
-  <summary>
+<summary>
 
-  <b>Click to expand code</b>
-
-  </summary>
-
-</details>
+<b>Click to expand code</b>
+</summary>
 
 ``` r
 # logistic regression errors on test data
@@ -306,6 +301,8 @@ percent_incorrect(patient_test$adherent_binary, results_lr_test$predict_class)
     ## 1     1 (Adherent)        81   528             15.34
     ## 2 0 (Non-Adherent)       121   298             40.60
 
+</details>
+
 And then evaluated the percentage of incorrect predictions on Gradient
 Boosting.
 
@@ -315,15 +312,12 @@ The confusion matrix for the Gradient Boosting model indicated that:
 
 - **Incorrect non-adherence predictions:** 37.92%
 
-  <details>
+<details>
 
-  <summary>
+<summary>
 
-  <b>Click to expand code</b>
-
-  </summary>
-
-</details>
+<b>Click to expand code</b>
+</summary>
 
 ``` r
 # overall accuracy on test data
@@ -341,6 +335,8 @@ cat("Gradient Boosting Overall Accuracy:", round(percent_corr_gbm, 2), "%\n")
 
     ## Gradient Boosting Overall Accuracy: 79.18 %
 
+</details>
+
 #### Visualizing ROC Curve for Both Models
 
 Lastly, I plotted the ROC curve to visualize model accuracy on the
@@ -352,8 +348,6 @@ training data.
 
 <b>Click to expand code</b>
 </summary>
-
-</details>
 
 ``` r
 # out of sample ROC curves
@@ -367,6 +361,8 @@ plot_roc_curve(results_gbm_test$roc, results_gbm_test$auc, "Gradient Boosting (T
 ```
 
 ![](patient_adherence_analysis_files/figure-gfm/unnamed-chunk-12-2.png)<!-- -->
+
+</details>
 
 ### False Non-Adherent Predictions Handling
 
