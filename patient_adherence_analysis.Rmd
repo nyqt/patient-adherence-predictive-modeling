@@ -248,7 +248,7 @@ The Gradient Boosting model was **3.24%** more accurate at predicting adherent p
 percent_correct(patient_train$adherent_binary, results_gbm$predict_class)
 ```
 
-<details>
+</details>
 
 #### Visualizing ROC Curve for Both Models
 
