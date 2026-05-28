@@ -3,18 +3,9 @@ title: "Patient Adherence Analysis"
 author: "Natalie Youngquist"
 output: github_document
 ---
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
-knitr::knit_hooks$set(source = function(x, options) {
-  if (!is.null(options$toggle)) {
-    paste0("\n<details><summary><b>Click to expand code</b></summary>\n\n", 
-           "```r\n", x, "\n```", 
-           "\n</details>\n")
-  } else {
-    x
-  }
-})
 
 # =========================================================================
 # 1. LIBRARIES & GLOBAL SETTINGS
@@ -147,7 +138,13 @@ percent_incorrect <- function(actual, predicted) {
 
 Before doing any analysis on the models, I wanted to confirm that the data had loaded as expected.
 
-```{r, toggle=TRUE}
+<details>
+
+<summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r}
 # confirm the data has loaded as expected
 cat("Training Rows:", nrow(patient_train), "\n")
 cat("Testing Rows:", nrow(patient_test), "\n")
@@ -157,7 +154,13 @@ cat("Testing Rows:", nrow(patient_test), "\n")
 
 I then fit each model with the training data to measure the response and compared the AUC scores of the Logistic Regression, Random Forest, and Gradient Boosting models.
 
-```{r, toggle=TRUE, message=FALSE}
+<details>
+
+<summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r, message=FALSE}
 # Logistic AIC Train AUC
 pred_train_lr <- predict(model_lr, type = "response")
 auc_train_lr <- auc(patient_train$adherent_binary, pred_train_lr)
@@ -189,7 +192,13 @@ auc_table
 
 Based on the AUC scores, I chose to continue evaluating the Logistic Regression model, and the Gradient Boosting model. Random Forest performed adequately, but not as well as Gradient Boosting. I continued with Logistic Regression because it is the simpler model and I wanted to see if the complexity from the Gradient Boosting was necessary when compared to the results of the Logistic Regression model.
 
-```{r, toggle=TRUE, message=FALSE}
+<details>
+
+<summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r, message=FALSE}
 # extract model results on training data
 results_lr  <- evaluate_lr(model_lr, patient_train, "adherent_binary")
 results_gbm <- evaluate_gbm(model_gbm, patient_train, "adherent_binary", 500)
@@ -202,9 +211,16 @@ I calculated the percentage of correct predictions on the training data using th
 The confusion matrix for the Logistic Regression model indicated that:
 
 -   **Correct adherence predictions:** 86.99%
+
 -   **Correct non-adherence predictions:** 61.00%
 
-```{r, toggle = TRUE}
+    <details>
+
+    <summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r}
 # logistic regression performance on training data
 #print(results_lr$confusion_matrix)
 percent_correct(patient_train$adherent_binary, results_lr$predict_class)
@@ -221,7 +237,13 @@ The confusion matrix for the Gradient Boosting model indicated that:
 
 The Gradient Boosting model was **3.24%** more accurate at predicting adherent patients and **4.53%%** more accurate at predicting non-adherent patients.
 
-```{r, toggle=TRUE}
+<details>
+
+<summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r}
 # gradient boosting performance on training data
 #print(results_gbm$confusion_matrix)
 percent_correct(patient_train$adherent_binary, results_gbm$predict_class)
@@ -231,7 +253,13 @@ percent_correct(patient_train$adherent_binary, results_gbm$predict_class)
 
 I also plotted the ROC curve to visualize model accuracy on the training data.
 
-```{r, toggle=TRUE}
+<details>
+
+<summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r}
 # in sample ROC curves
 plot_roc_curve(results_lr$roc, results_lr$auc, "Logistic Regression (Train)")
 plot_roc_curve(results_gbm$roc, results_gbm$auc, "Gradient Boosting (Train)")
@@ -241,7 +269,13 @@ Having performed robust evaluation on the models using the training data, I then
 
 ## Model Evaluation on Testing Data
 
-```{r, toggle=TRUE, message=FALSE}
+<details>
+
+<summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r, message=FALSE}
 # extract model results on test data
 results_lr_test  <- evaluate_lr(model_lr, patient_test, "adherent_binary")
 results_gbm_test <- evaluate_gbm(model_gbm, patient_test, "adherent_binary", 500)
@@ -254,9 +288,16 @@ I calculated the percentage of correct predictions on the testing data using the
 The confusion matrix for the Logistic Regression model indicated that:
 
 -   **Correct adherence predictions:** 84.66%
+
 -   **Correct non-adherence predictions:** 59.40%
 
-```{r, toggle=TRUE}
+    <details>
+
+    <summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r}
 # logistic regression accuracy on test data
 #print(results_lr_test$confusion_matrix)
 percent_correct(patient_test$adherent_binary, results_lr_test$predict_class)
@@ -273,7 +314,13 @@ The confusion matrix for the Gradient Boosting model indicated that:
 
 The Gradient Boosting model was **4.17%** more accurate at predicting adherent patients and **2.68%%** more accurate at predicting non-adherent patients.
 
-```{r, toggle=TRUE}
+<details>
+
+<summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r}
 # gradient boosting accuracy on test data
 #print(results_gbm_test$confusion_matrix)
 percent_correct(patient_test$adherent_binary, results_gbm_test$predict_class)
@@ -286,9 +333,16 @@ I also wanted to know the percentage of incorrect predictions for each model. I 
 The confusion matrix for the Logistic Regression model indicated that:
 
 -   **Incorrect adherence predictions:** 15.34%
+
 -   **Incorrect non-adherence predictions:** 40.60%
 
-```{r, toggle=TRUE}
+    <details>
+
+    <summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r}
 # logistic regression errors on test data
 percent_incorrect(patient_test$adherent_binary, results_lr_test$predict_class)
 ```
@@ -298,16 +352,16 @@ And then evaluated the percentage of incorrect predictions on Gradient Boosting.
 The confusion matrix for the Gradient Boosting model indicated that:
 
 -   **Incorrect adherence predictions:** 11.17%
+
 -   **Incorrect non-adherence predictions:** 37.92%
 
-```{r, toggle=TRUE}
-# gradient boosting errors on test data
-percent_incorrect(patient_test$adherent_binary, results_gbm_test$predict_class)
-```
+    <details>
 
-For a clear comparison, I reviewed the percentage of overall accuracy for each model. Gradient Boosting was more accurate by **3.64%**.
+    <summary><b>Click to expand code</b></summary>
 
-```{r, toggle=TRUE}
+</details>
+
+```{r}
 # overall accuracy on test data
 percent_corr_lr  <- total_percent_correct(patient_test$adherent_binary, results_lr_test$predict_class)
 percent_corr_gbm <- total_percent_correct(patient_test$adherent_binary, results_gbm_test$predict_class)
@@ -320,7 +374,13 @@ cat("Gradient Boosting Overall Accuracy:", round(percent_corr_gbm, 2), "%\n")
 
 Lastly, I plotted the ROC curve to visualize model accuracy on the training data.
 
-```{r, toggle=TRUE}
+<details>
+
+<summary><b>Click to expand code</b></summary>
+
+</details>
+
+```{r}
 # out of sample ROC curves
 plot_roc_curve(results_lr_test$roc, results_lr_test$auc, "Logistic Regression (Test)")
 plot_roc_curve(results_gbm_test$roc, results_gbm_test$auc, "Gradient Boosting (Test)")
