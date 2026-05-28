@@ -1,12 +1,21 @@
 ---
 title: "Patient Adherence Analysis"
 author: "Natalie Youngquist"
-output: 
-  html_document:
-    code_folding: "hide"
+output: github_document
 ---
-
 ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+knitr::knit_hooks$set(source = function(x, options) {
+  if (!is.null(options$toggle)) {
+    paste0("\n<details><summary><b>Click to expand code</b></summary>\n\n", 
+           "```r\n", x, "\n```", 
+           "\n</details>\n")
+  } else {
+    x
+  }
+})
+
 # =========================================================================
 # 1. LIBRARIES & GLOBAL SETTINGS
 # =========================================================================
