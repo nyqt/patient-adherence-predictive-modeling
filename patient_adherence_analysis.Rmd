@@ -260,13 +260,19 @@ I also plotted the ROC curve to visualize model accuracy on the training data.
 
 <summary><b>Click to expand code</b></summary>
 
-```{r plot-insample-roc}
+```{r}
 # in sample ROC curves
 plot_roc_curve(results_lr$roc, results_lr$auc, "Logistic Regression (Train)")
 plot_roc_curve(results_gbm$roc, results_gbm$auc, "Gradient Boosting (Train)")
 ```
 
 </details>
+
+```{r}
+# in sample ROC curves
+plot_roc_curve(results_lr$roc, results_lr$auc, "Logistic Regression (Train)")
+plot_roc_curve(results_gbm$roc, results_gbm$auc, "Gradient Boosting (Train)")
+```
 
 Having performed robust evaluation on the models using the training data, I then moved on to evaluation the models using the testing data.
 
@@ -383,13 +389,19 @@ Lastly, I plotted the ROC curve to visualize model accuracy on the training data
 
 <summary><b>Click to expand code</b></summary>
 
-```{r plot-outsample-roc}
+```{r}
 # out of sample ROC curves
 plot_roc_curve(results_lr_test$roc, results_lr_test$auc, "Logistic Regression (Test)")
 plot_roc_curve(results_gbm_test$roc, results_gbm_test$auc, "Gradient Boosting (Test)")
 ```
 
 </details>
+
+```{r}
+# out of sample ROC curves
+plot_roc_curve(results_lr_test$roc, results_lr_test$auc, "Logistic Regression (Test)")
+plot_roc_curve(results_gbm_test$roc, results_gbm_test$auc, "Gradient Boosting (Test)")
+```
 
 ### False Non-Adherent Predictions Handling
 
