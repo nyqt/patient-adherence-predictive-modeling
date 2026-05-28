@@ -260,7 +260,7 @@ I also plotted the ROC curve to visualize model accuracy on the training data.
 
 <summary><b>Click to expand code</b></summary>
 
-```{r}
+```{r,eval=FALSE}
 # in sample ROC curves
 plot_roc_curve(results_lr$roc, results_lr$auc, "Logistic Regression (Train)")
 plot_roc_curve(results_gbm$roc, results_gbm$auc, "Gradient Boosting (Train)")
@@ -268,7 +268,7 @@ plot_roc_curve(results_gbm$roc, results_gbm$auc, "Gradient Boosting (Train)")
 
 </details>
 
-```{r}
+```{r,echo=FALSE}
 # in sample ROC curves
 plot_roc_curve(results_lr$roc, results_lr$auc, "Logistic Regression (Train)")
 plot_roc_curve(results_gbm$roc, results_gbm$auc, "Gradient Boosting (Train)")
@@ -389,7 +389,7 @@ Lastly, I plotted the ROC curve to visualize model accuracy on the training data
 
 <summary><b>Click to expand code</b></summary>
 
-```{r}
+```{r,eval=FALSE}
 # out of sample ROC curves
 plot_roc_curve(results_lr_test$roc, results_lr_test$auc, "Logistic Regression (Test)")
 plot_roc_curve(results_gbm_test$roc, results_gbm_test$auc, "Gradient Boosting (Test)")
@@ -397,7 +397,7 @@ plot_roc_curve(results_gbm_test$roc, results_gbm_test$auc, "Gradient Boosting (T
 
 </details>
 
-```{r}
+```{r,echo=FALSE}
 # out of sample ROC curves
 plot_roc_curve(results_lr_test$roc, results_lr_test$auc, "Logistic Regression (Test)")
 plot_roc_curve(results_gbm_test$roc, results_gbm_test$auc, "Gradient Boosting (Test)")
