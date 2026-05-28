@@ -162,7 +162,7 @@ percent_correct(patient_train$adherent_binary, results_gbm$predict_class)
     ## 1     1 (Adherent)    1866  2068           90.23
     ## 2 0 (Non-Adherent)     810  1236           65.53
 
-<details>
+</details>
 
 #### Visualizing ROC Curve for Both Models
 
