@@ -181,13 +181,13 @@ data.
 plot_roc_curve(results_lr$roc, results_lr$auc, "Logistic Regression (Train)")
 ```
 
-![](patient_adherence_analysis_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](patient_adherence_analysis_files/figure-gfm/plot-insample-roc-1.png)<!-- -->
 
 ``` r
 plot_roc_curve(results_gbm$roc, results_gbm$auc, "Gradient Boosting (Train)")
 ```
 
-![](patient_adherence_analysis_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
+![](patient_adherence_analysis_files/figure-gfm/plot-insample-roc-2.png)<!-- -->
 
 </details>
 
@@ -354,13 +354,13 @@ training data.
 plot_roc_curve(results_lr_test$roc, results_lr_test$auc, "Logistic Regression (Test)")
 ```
 
-![](patient_adherence_analysis_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](patient_adherence_analysis_files/figure-gfm/plot-outsample-roc-1.png)<!-- -->
 
 ``` r
 plot_roc_curve(results_gbm_test$roc, results_gbm_test$auc, "Gradient Boosting (Test)")
 ```
 
-![](patient_adherence_analysis_files/figure-gfm/unnamed-chunk-12-2.png)<!-- -->
+![](patient_adherence_analysis_files/figure-gfm/plot-outsample-roc-2.png)<!-- -->
 
 </details>
 
