@@ -7,6 +7,10 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+source("scripts/01_data_preprocessing.R")
+source("scripts/02_eda.R")
+source("scripts/03_modeling.R")
+
 # =========================================================================
 # 1. LIBRARIES & GLOBAL SETTINGS
 # =========================================================================
